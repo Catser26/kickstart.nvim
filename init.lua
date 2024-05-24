@@ -564,11 +564,25 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      local lspconfig = require 'lspconfig'
+
       local servers = {
         -- clangd = {},
         gopls = {},
+        csharp_ls = {},
+        ansiblels = {},
+        bashls = {},
+        dockerls = {},
         -- pyright = {},
-        -- rust_analyzer = {},
+        rust_analyzer = {},
+
+        -- TODO swift lsp for iOS development
+        --sourcekit = {
+        --  cmd = {
+        --    '/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp',
+        --  },
+        --  root_dir = lspconfig.util.root_pattern('.git', 'Package.swift', 'compile_commands.json'),
+        --},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -594,6 +608,9 @@ require('lazy').setup({
         },
       }
 
+      -- require('lspconfig').sourcekit.setup {
+      --  cmd = { '/usr/bin/sourcekit-lsp' },
+      --}
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
