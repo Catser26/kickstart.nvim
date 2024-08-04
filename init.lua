@@ -575,13 +575,13 @@ require('lazy').setup({
       local lspconfig = require 'lspconfig'
 
       local servers = {
-        -- clangd = {},
+        clangd = {},
         gopls = {},
         csharp_ls = {},
         ansiblels = {},
         bashls = {},
         dockerls = {},
-        -- pyright = {},
+        pyright = {},
         rust_analyzer = {},
 
         -- TODO swift lsp for iOS development
@@ -599,6 +599,11 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        tsserver = {
+          'pmizio/typescript-tools.nvim',
+          dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+          opts = {},
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -819,7 +824,7 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
-  { 'github/copilot.vim' },
+  -- { 'github/copilot.vim' },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
