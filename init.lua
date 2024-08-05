@@ -102,7 +102,7 @@ vim.g.have_nerd_font = false
 vim.opt.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.opt.relativenumber = true
+vim.opt.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -402,6 +402,17 @@ require('lazy').setup({
     end,
   },
 
+
+  -- nvim-tree plugin test
+  {
+    'nvim-tree/nvim-tree.lua',
+    keys = {
+      { 'n', '<leader>e', ':NvimTreeToggle<CR>', { silent = true } },
+    },
+  },
+
+  { -- LSP Configuration & Plugins
+
   -- LSP Plugins
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -418,6 +429,7 @@ require('lazy').setup({
   { 'Bilal2453/luvit-meta', lazy = true },
   {
     -- Main LSP Configuration
+
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
@@ -568,11 +580,25 @@ require('lazy').setup({
       --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
+      local lspconfig = require 'lspconfig'
+
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
-        -- rust_analyzer = {},
+        clangd = {},
+        gopls = {},
+        csharp_ls = {},
+        ansiblels = {},
+        bashls = {},
+        dockerls = {},
+        pyright = {},
+        rust_analyzer = {},
+
+        -- TODO swift lsp for iOS development
+        --sourcekit = {
+        --  cmd = {
+        --    '/Library/Developer/CommandLineTools/usr/bin/sourcekit-lsp',
+        --  },
+        --  root_dir = lspconfig.util.root_pattern('.git', 'Package.swift', 'compile_commands.json'),
+        --},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -581,6 +607,11 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+        tsserver = {
+          'pmizio/typescript-tools.nvim',
+          dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+          opts = {},
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -598,6 +629,9 @@ require('lazy').setup({
         },
       }
 
+      -- require('lspconfig').sourcekit.setup {
+      --  cmd = { '/usr/bin/sourcekit-lsp' },
+      --}
       -- Ensure the servers and tools above are installed
       --  To check the current status of installed tools and/or manually install
       --  other tools, you can run
@@ -803,6 +837,8 @@ require('lazy').setup({
   -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
+  -- { 'github/copilot.vim' },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -884,7 +920,7 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
