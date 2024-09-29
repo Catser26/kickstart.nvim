@@ -297,6 +297,15 @@ require('lazy').setup({
   --
   -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
+  {
+    'lervag/vimtex',
+    lazy = false,
+
+    init = function()
+      vim.g.vimtex_view_method = 'zathura'
+    end,
+  },
+
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -604,11 +613,11 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
-        tsserver = {
-          'pmizio/typescript-tools.nvim',
-          dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-          opts = {},
-        },
+        --        tsserver = {
+        --          'pmizio/typescript-tools.nvim',
+        --          dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+        --          opts = {},
+        --        },
 
         lua_ls = {
           -- cmd = {...},
