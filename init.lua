@@ -305,7 +305,8 @@ require('lazy').setup({
     lazy = false,
 
     init = function()
-      vim.g.vimtex_view_method = 'preview'
+      vim.g.vimtex_view_method = 'general'
+      -- vim.g.vimtex_compiler_latexmk =
     end,
   },
 
@@ -600,7 +601,13 @@ require('lazy').setup({
         dockerls = {},
         pyright = {},
         rust_analyzer = {},
-
+        html = {},
+        htmx = {},
+        ts_ls = {},
+        yamlls = {},
+        texlab = {},
+        -- Nix lsp (use for nixos config :3)
+        rnix = {},
         -- TODO swift lsp for iOS development
         --sourcekit = {
         --  cmd = {
